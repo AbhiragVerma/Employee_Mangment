@@ -121,3 +121,50 @@ class PartTimeEmployee(Employee):
             "hourly_rate": self._hourly_rate,
             "hours_worked_per_month": self._hours_worked_per_month
         }
+    
+class Manager(FullTimeEmployee):
+
+    def __init__(
+        self,
+        employee_id,
+        name,
+        department,
+        monthly_salary,
+        bonus
+    ):
+        super().__init__(
+            employee_id,
+            name,
+            department,
+            monthly_salary
+        )
+
+        self._bonus = bonus
+
+    @property
+    def bonus(self):
+        return self._bonus
+
+    @bonus.setter
+    def bonus(self, bonus):
+        self._bonus = bonus
+
+    def calculate_salary(self):
+        return super().calculate_salary() + self._bonus
+
+    def display_details(self):
+        return (
+            f"{super().display_details()}, "
+            f"Bonus: {self._bonus}"
+        )
+
+    def to_dict(self):
+        return {
+            "type": "manager",
+            "employee_id": self._employee_id,
+            "name": self._name,
+            "department": self._department,
+            "monthly_salary": self._monthly_salary,
+            "bonus": self._bonus
+        }
+    
